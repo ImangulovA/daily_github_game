@@ -38,16 +38,16 @@ export const GAME = {
     return result && typeof result.moves === 'number' ? -result.moves : null;
   },
 
-  // One or more lines describing a finished result for the share sheet. Receive
-  // the result blob, the day index, and the bare share URL. Keep it spoiler-free.
+  // Spoiler-free share text. CONVENTION (2 lines): the URL + "#<day> -- <result
+  // summary>" on line 1, then a compact emoji tally on line 2. Receive the result
+  // blob, the day index, and the bare share URL.
+  //   <url> #<day> -- <summary>
+  //   <emojis>
   shareLine(result, dayIdx, url) {
     const moves = result?.moves ?? '?';
     const t = result?.ms != null ? fmtTime(result.ms) : '';
     const star = result?.won ? '💡' : '🌑';
-    return [
-      `${GAME.title} #${dayIdx}`,
-      `${star} ${moves} moves${t ? ' · ' + t : ''}`,
-      url
-    ].join('\n');
+    const summary = `${moves} moves${t ? ' · ' + t : ''}`;
+    return `${url} #${dayIdx} -- ${summary}\n${star}`;
   }
 };

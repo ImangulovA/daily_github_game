@@ -22,8 +22,9 @@ export const GAME = {
   // null => unscored: stats track only time + completion.
   scoreOf(result) { return null; },
 
-  // one or more lines for the share sheet. Keep it spoiler-free.
-  shareLine(result, dayIdx, url) { return `${this.title} #${dayIdx}\n${url}`; }
+  // Share text. Keep it spoiler-free. CONVENTION (2 lines): URL + "#<day> --
+  // <summary>" on line 1, a compact emoji tally on line 2.
+  shareLine(result, dayIdx, url) { return `${url} #${dayIdx} -- <summary>\n<emojis>`; }
 };
 ```
 
